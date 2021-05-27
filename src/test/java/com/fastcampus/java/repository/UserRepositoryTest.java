@@ -21,11 +21,11 @@ public class UserRepositoryTest extends JavaApplicationTests {
 
     @Test
     public void create(){
-        String account = "Test01";
-        String password = "Test01";
+        String account = "Test03";
+        String password = "Test03";
         String status = "REGISTERED";
         String email = "Test01@gmail.com";
-        String phoneNumber = "010-1111-2222";
+        String phoneNumber = "010-1111-3333";
         LocalDateTime registeredAt = LocalDateTime.now();
         LocalDateTime createdAt = LocalDateTime.now();
         String createdBy = "AdminServer";
@@ -37,8 +37,15 @@ public class UserRepositoryTest extends JavaApplicationTests {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
-        user.setCreatedAt(createdAt);
-        user.setCreatedBy(createdBy);
+
+        // @Builder 빌더패턴을 통해서 생성
+        // account, password, status, email까지만 생성자가 들어간 user 생성
+        User u = User.builder()
+                .account(account)
+                .password(password)
+                .status(status)
+                .email(email)
+                .build();
 
         User newUser = userRepository.save(user);
         Assertions.assertNotNull(newUser);
@@ -48,6 +55,14 @@ public class UserRepositoryTest extends JavaApplicationTests {
     @Transactional
     public void read(){
         User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-1111-2222");
+
+        // @Accessors(chain = true) 체인패턴을 통해서 값들을 업데이트
+        user
+                .setEmail("")
+                .setPhoneNumber("")
+                .setStatus("");
+
+        User u = new User().setAccount("").setEmail("").setPassword("");
 
         if(user != null){
             user.getOrderGroupList().stream().forEach(orderGroup -> {
