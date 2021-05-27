@@ -3,6 +3,7 @@ package com.fastcampus.java.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity // == table
 //@Table(name = "user") //클래스 이름과 테이블 이름이 동일하다면 굳이 선언을 안해줘도 됨
+@ToString(exclude = {"orderGroup"})
 public class User {
 
     @Id
@@ -40,5 +42,9 @@ public class User {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
+
+    // User 1 : N OrderGroup
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<OrderGroup> orderGroupList;
 
 }
