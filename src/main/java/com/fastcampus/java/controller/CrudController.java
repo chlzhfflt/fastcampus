@@ -2,11 +2,12 @@ package com.fastcampus.java.controller;
 
 import com.fastcampus.java.ifs.CrudInterface;
 import com.fastcampus.java.model.network.Header;
+import com.fastcampus.java.service.BaseService;
 import org.springframework.web.bind.annotation.*;
 
 public abstract class CrudController<Req,Res> implements CrudInterface<Req,Res> {
 
-    protected CrudInterface<Req,Res> baseService;
+    protected BaseService<Req,Res> baseService;
 
     @Override
     @PostMapping("")
