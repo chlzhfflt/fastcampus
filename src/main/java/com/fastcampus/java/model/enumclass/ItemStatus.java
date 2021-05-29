@@ -19,7 +19,7 @@ public enum ItemStatus {
 
 
 // 1. entity enum으로 관리할 수 있는 것 찾기
-// 2. 해상 enumclass 생성
+// 2. 해당 enumclass 생성 - @Getter , @AllArgsConstructor
 // 3. entity에 적용
 //      @Enumerated(EnumType.STRING)
 //      private ItemStatus status;
