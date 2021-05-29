@@ -1,5 +1,6 @@
 package com.fastcampus.java.model.entity;
 
+import com.fastcampus.java.model.enumclass.UserStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -31,7 +32,8 @@ public class User {
 
     private String password;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status; // REGISTERED , UNREGISTERED , WAITING.. 고정된 값을 사용함
 
     private String email;
 
