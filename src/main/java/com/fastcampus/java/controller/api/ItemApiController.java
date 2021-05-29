@@ -1,5 +1,6 @@
 package com.fastcampus.java.controller.api;
 
+import com.fastcampus.java.controller.CrudController;
 import com.fastcampus.java.ifs.CrudInterface;
 import com.fastcampus.java.model.network.Header;
 import com.fastcampus.java.model.network.request.ItemApiRequest;
@@ -8,34 +9,19 @@ import com.fastcampus.java.service.ItemApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+
 @RestController
 @RequestMapping("/api/item")
-public class ItemApiController implements CrudInterface<ItemApiRequest, ItemApiResponse> {
+public class ItemApiController extends CrudController<ItemApiRequest, ItemApiResponse> {
 
     @Autowired
     private ItemApiLogicService itemApiLogicService;
 
-    @Override
-    @PostMapping("")    // /api/item
-    public Header<ItemApiResponse> create(@RequestBody Header<ItemApiRequest> request) {
-        return itemApiLogicService.create(request);
+    @PostConstruct
+    public void init(){
+        this.baseService = itemApiLogicService;
     }
 
-    @Override
-    @GetMapping("{id}") // /api/item/1 ... 1000
-    public Header<ItemApiResponse> read(@PathVariable Long id) {
-        return itemApiLogicService.read(id);
-    }
-
-    @Override
-    @PutMapping("")     // /api/item
-    public Header<ItemApiResponse> update(@RequestBody Header<ItemApiRequest> request) {
-        return itemApiLogicService.update(request);
-    }
-
-    @Override
-    @DeleteMapping("{id}")// /api/item/1 ... 1000
-    public Header delete(@PathVariable Long id) {
-        return itemApiLogicService.delete(id);
-    }
+    // CRUD가 생략되어있지만 CrudController에서 상속받아서 req,res만 지정해주면 정상적으로 동작
 }
