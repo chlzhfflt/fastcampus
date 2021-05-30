@@ -4,6 +4,7 @@ import com.fastcampus.java.ifs.CrudInterface;
 import com.fastcampus.java.model.network.Header;
 import com.fastcampus.java.model.network.request.UserApiRequest;
 import com.fastcampus.java.model.network.response.UserApiResponse;
+import com.fastcampus.java.model.network.response.UserOrderInfoApiResponse;
 import com.fastcampus.java.service.UserApiLogicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
 
     @Autowired
     private UserApiLogicService userApiLogicService;
+
+    @GetMapping("/{id}/orderInfo")
+    public Header<UserOrderInfoApiResponse> orderInfo(@PathVariable Long id){
+
+        return userApiLogicService.orderInfo(id);
+    }
 
     @GetMapping("")
     public Header<List<UserApiResponse>> search(@PageableDefault(sort = "id",direction = Sort.Direction.ASC, size = 10) Pageable pageable){
