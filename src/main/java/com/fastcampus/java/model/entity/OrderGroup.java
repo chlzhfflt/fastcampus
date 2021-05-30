@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@ToString(exclude = {"user","orderDetailList"}) // user는 ToString에서 제외해달라
+@ToString(exclude = {"user","orderDetailList","settlement"}) // user는 ToString에서 제외해달라
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Accessors(chain = true)
@@ -66,4 +66,8 @@ public class OrderGroup {
     // OrderGroup 1 : N OrderDetail
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderGroup")
     private List<OrderDetail> orderDetailList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderGroup")
+    private List<Settlement> settlementList;
+
 }
