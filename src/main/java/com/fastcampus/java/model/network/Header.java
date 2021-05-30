@@ -25,6 +25,8 @@ public class Header<T> {
 
     private T data;
 
+    private Pagination pagination;
+
     // 정상적일때 : OK
     public static <T> Header<T> OK(){
         return (Header<T>)Header.builder()
@@ -41,6 +43,17 @@ public class Header<T> {
                 .resultCode("OK")
                 .description("OK")
                 .data(data)
+                .build();
+    }
+
+    // 데이터가 있을때 : 데이터를 가지는 OK
+    public static <T> Header<T> OK(T data,Pagination pagination){
+        return (Header<T>)Header.builder()
+                .transactionTime(LocalDateTime.now())
+                .resultCode("OK")
+                .description("OK")
+                .data(data)
+                .pagination(pagination)
                 .build();
     }
 

@@ -51,25 +51,25 @@ public class OrderGroupApiLogicService extends BaseService<OrderGroupApiRequest,
 
         OrderGroupApiRequest body = request.getData();
 
-       return baseRepository.findById(body.getId())
+        return baseRepository.findById(body.getId())
                 .map(orderGroup -> { // 있는경우
-                  orderGroup
-                          .setStatus(body.getStatus())
-                          .setOrderType(body.getOrderType())
-                          .setRevAddress(body.getRevAddress())
-                          .setRevName(body.getRevName())
-                          .setPaymentType(body.getPaymentType())
-                          .setTotalPrice(body.getTotalPrice())
-                          .setTotalQuantity(body.getTotalQuantity())
-                          .setOrderAt(body.getOrderAt())
-                          .setArrivalDate(body.getArrivalDate())
-                          .setUser(userRepository.getOne(body.getUserId()));
+                    orderGroup
+                            .setStatus(body.getStatus())
+                            .setOrderType(body.getOrderType())
+                            .setRevAddress(body.getRevAddress())
+                            .setRevName(body.getRevName())
+                            .setPaymentType(body.getPaymentType())
+                            .setTotalPrice(body.getTotalPrice())
+                            .setTotalQuantity(body.getTotalQuantity())
+                            .setOrderAt(body.getOrderAt())
+                            .setArrivalDate(body.getArrivalDate())
+                            .setUser(userRepository.getOne(body.getUserId()));
 
-                  return orderGroup;
+                    return orderGroup;
                 })
-               .map(changeOrderGroup -> baseRepository.save(changeOrderGroup))
-               .map(newOrderGroup -> response(newOrderGroup)) // (this::response)
-               .orElseGet(()->Header.ERROR("데이터 없음")); // 없는경우
+                .map(changeOrderGroup -> baseRepository.save(changeOrderGroup))
+                .map(newOrderGroup -> response(newOrderGroup)) // (this::response)
+                .orElseGet(()->Header.ERROR("데이터 없음")); // 없는경우
     }
 
     @Override

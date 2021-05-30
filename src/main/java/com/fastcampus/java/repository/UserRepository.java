@@ -9,4 +9,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> { // <타입, 기본키타입>
     User findFirstByPhoneNumberOrderByIdDesc(String phoneNumber);
+
+    // select * from user where email = ?
+    Optional<User> findByEmail(String email);
 }

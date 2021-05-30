@@ -18,7 +18,7 @@ public class AdminUserRepositoryTest extends JavaApplicationTests {
         AdminUser adminUser = new AdminUser();
         adminUser.setAccount("AdminUser01");
         adminUser.setPassword("AdminUser01");
-        adminUser.setStatus("REGISTERED");
+        adminUser.setStatus(adminUserRepository.getOne(adminUser.getId()).getStatus());
         adminUser.setRole("PARTNER");
 //        adminUser.setCreatedAt(LocalDateTime.now());
 //        adminUser.setCreatedBy("AdminServer");
