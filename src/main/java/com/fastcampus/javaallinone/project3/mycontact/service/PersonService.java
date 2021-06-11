@@ -19,9 +19,11 @@ public class PersonService {
     private PersonRepository personRepository;
     
     public List<Person> getPeopleExcludeBlocks(){ // 차단된 사람을 제외하고 나머지 전체 사람을 가져오는 로직
-        List<Person> people = personRepository.findAll();
-        
-        return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList()); // block data가 없는 사람만 가져옴
+        return personRepository.findByBlockIsNull();
+    }
+
+    public List<Person> getPeopleByName(String name){
+        return personRepository.findByName(name);
     }
 
     @Transactional(readOnly = true)
