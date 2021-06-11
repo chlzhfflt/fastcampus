@@ -37,4 +37,12 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
+
+    private boolean block;
+
+    private String blockReason;
+
+    private LocalDate blockStartDate;
+
+    private LocalDate blockEndDate;
 }
