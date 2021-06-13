@@ -75,4 +75,14 @@ public class PersonService {
 
         personRepository.save(person);
     }
+
+//    @Transactional
+//    public Person getBirthdayPerson(){
+//        Person person = personRepository.findByBirthday().orElse(null); // get을 하는데 값이 없으면 null을 return한다는 의미
+//
+////        System.out.println("person : " + person);
+//        log.info("person : {}", person);
+//
+//        return person;
+//    }
 }

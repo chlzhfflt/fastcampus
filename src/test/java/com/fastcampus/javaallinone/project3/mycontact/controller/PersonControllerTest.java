@@ -102,4 +102,11 @@ class PersonControllerTest {
 //        symbol:   variable log
 //        location: class PersonControllerTest
     }
+
+//    @Test
+//    void getBirthdayPerson() throws Exception{
+//        mockMvc.perform(
+//                MockMvcRequestBuilders.get()
+//        )
+//    }
 }

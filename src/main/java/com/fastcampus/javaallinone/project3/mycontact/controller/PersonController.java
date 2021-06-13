@@ -52,4 +52,9 @@ public class PersonController {
         log.info("person -> {} ", personRepository.findAll());
     }
 
+//    @GetMapping("/birthday-friends")
+//    public Person getBirthdayPerson(){
+//        personService.getBirthdayPerson()
+//    }
+
 }
