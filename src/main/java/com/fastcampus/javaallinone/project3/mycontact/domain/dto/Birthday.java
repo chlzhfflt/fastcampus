@@ -13,15 +13,15 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class Birthday {
-    private int yearOfBirthday;
+    private Integer yearOfBirthday;
 
     @Min(1)
     @Max(12)
-    private int monthOfBirthday;
+    private Integer monthOfBirthday;
 
     @Min(1)
     @Max(31)
-    private int dayOfBirthday;
+    private Integer dayOfBirthday;
 
     public Birthday(LocalDate birthday){ // birthday 를 localdate타입으로 한번 랩핑해줌
         this.yearOfBirthday = birthday.getYear();
