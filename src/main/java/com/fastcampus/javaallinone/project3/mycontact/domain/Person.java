@@ -31,10 +31,6 @@ public class Person {
     @Column(nullable = false)
     private String name;
 
-    @NonNull
-    @Min(1)
-    private int age;
-
     private String hobby;
 
     @NonNull
@@ -61,10 +57,6 @@ public class Person {
     private Block block;
 
     public void set(PersonDto personDto){
-        if(personDto.getAge() != 0){
-            this.setAge(personDto.getAge());
-        }
-
         if(StringUtils.hasText(personDto.getHobby())){ // 강의영상에선 !StringUtils.isEmpty인데 isEmpty가 더이상 사용되지 않고 hasText로 변경됨 - 조건이 반대로 됨
             this.setHobby(personDto.getHobby());
         }
@@ -84,5 +76,17 @@ public class Person {
         if(StringUtils.hasText(personDto.getPhoneNumber())){
             this.setPhoneNumber(personDto.getPhoneNumber());
         }
+    }
+
+    public Integer getAge(){
+        if(this.birthday != null){
+            return LocalDate.now().getYear() - this.birthday.getYearOfBirthday() + 1;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean isBirthdayToday(){
+        return LocalDate.now().equals(LocalDate.of(this.birthday.getYearOfBirthday(), this.birthday.getMonthOfBirthday(), this.birthday.getDayOfBirthday()));
     }
 }
