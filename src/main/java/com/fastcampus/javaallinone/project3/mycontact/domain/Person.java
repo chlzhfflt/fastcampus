@@ -1,7 +1,9 @@
 package com.fastcampus.javaallinone.project3.mycontact.domain;
 
+import com.fastcampus.javaallinone.project3.mycontact.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project3.mycontact.domain.dto.Birthday;
 import lombok.*;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -51,4 +53,30 @@ public class Person {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Block block;
+
+    public void set(PersonDto personDto){
+        if(personDto.getAge() != 0){
+            this.setAge(personDto.getAge());
+        }
+
+        if(StringUtils.hasText(personDto.getHobby())){ // 강의영상에선 !StringUtils.isEmpty인데 isEmpty가 더이상 사용되지 않고 hasText로 변경됨 - 조건이 반대로 됨
+            this.setHobby(personDto.getHobby());
+        }
+
+        if(StringUtils.hasText(personDto.getBloodType())){
+            this.setBloodType(personDto.getBloodType());
+        }
+
+        if(StringUtils.hasText(personDto.getAddress())){
+            this.setAddress(personDto.getAddress());
+        }
+
+        if(StringUtils.hasText(personDto.getJob())){
+            this.setJob(personDto.getJob());
+        }
+
+        if(StringUtils.hasText(personDto.getPhoneNumber())){
+            this.setPhoneNumber(personDto.getPhoneNumber());
+        }
+    }
 }
