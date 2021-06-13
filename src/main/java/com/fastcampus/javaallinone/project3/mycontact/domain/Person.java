@@ -33,11 +33,6 @@ public class Person {
 
     private String hobby;
 
-    @NonNull
-    @NotEmpty
-    @Column(nullable = false)
-    private String bloodType;
-
     private String address;
 
     @Valid
@@ -46,23 +41,14 @@ public class Person {
 
     private String job;
 
-    @ToString.Exclude
     private String phoneNumber;
 
     @ColumnDefault("0")
     private boolean deleted;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private Block block;
-
     public void set(PersonDto personDto){
         if(StringUtils.hasText(personDto.getHobby())){ // 강의영상에선 !StringUtils.isEmpty인데 isEmpty가 더이상 사용되지 않고 hasText로 변경됨 - 조건이 반대로 됨
             this.setHobby(personDto.getHobby());
-        }
-
-        if(StringUtils.hasText(personDto.getBloodType())){
-            this.setBloodType(personDto.getBloodType());
         }
 
         if(StringUtils.hasText(personDto.getAddress())){
@@ -75,6 +61,10 @@ public class Person {
 
         if(StringUtils.hasText(personDto.getPhoneNumber())){
             this.setPhoneNumber(personDto.getPhoneNumber());
+        }
+
+        if(personDto.getBirthday() != null){
+            this.setBirthday(Birthday.of(personDto.getBirthday()));
         }
     }
 

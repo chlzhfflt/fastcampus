@@ -11,10 +11,6 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByName(String name);
 
-    List<Person> findByBlockIsNull(); // Block이 차단이 되지 않은 경우의 person을 모두 가져옴
-
-    List<Person> findByBloodType(String bloodType);
-
 //    @Query(value = "select person from Person person where person.birthday.monthOfBirthday = ?1 and person.birthday.dayOfBirthday = ?2") // JPQL - entity 기반 query , ?1 은 첫번째 인자를 의미함
 //    List<Person> findByMonthOfBirthday(int monthOfBirthday, int dayOfBirthday); // 8월이 생일인 사람을 구해옴
 //    @Query(value = "select person from Person person where person.birthday.monthOfBirthday = :monthOfBirthday and person.birthday.dayOfBirthday = :dayOfBirthday") // 이름 기반
