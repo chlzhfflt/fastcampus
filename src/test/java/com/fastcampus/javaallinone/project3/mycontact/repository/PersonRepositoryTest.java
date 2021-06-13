@@ -44,28 +44,4 @@ class PersonRepositoryTest {
         assertThat(result.get(0).getName()).isEqualTo("martin");
         assertThat(result.get(1).getName()).isEqualTo("sophia");
     }
-
-    @Test
-    void findByBirthday(){
-        System.out.println(personRepository.findAll());
-
-        Date date = new Date();
-        SimpleDateFormat month = new SimpleDateFormat("MM", Locale.KOREA);
-        SimpleDateFormat day = new SimpleDateFormat("dd", Locale.KOREA);
-        String birthdayMonth = month.format(date);
-        String birthdayday = day.format(date);
-        int intMonth = Integer.parseInt(birthdayMonth); // 월
-        int intDay = Integer.parseInt(birthdayday); // 일
-
-        DateFormat dtf = new SimpleDateFormat("dd", Locale.KOREA);
-        final Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 1);
-        String birthdayDtf = dtf.format(cal.getTime());
-        int intDayTomorrow = Integer.parseInt(birthdayDtf); // 내일에 해당하는 '일'
-
-        List<Person> result = personRepository.findByBirthday(intMonth,intDay);
-        List<Person> resultTomorrow = personRepository.findByBirthday(intMonth,intDayTomorrow);
-        System.out.println("오늘 생일자목록 : " + result);
-        System.out.println("내일 생일자목록 : " + resultTomorrow);
-    }
 }

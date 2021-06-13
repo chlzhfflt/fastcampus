@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -67,13 +69,11 @@ public class PersonService {
         personRepository.save(person);
     }
 
-//    @Transactional
-//    public Person getBirthdayPerson(){
-//        Person person = personRepository.findByBirthday().orElse(null); // get을 하는데 값이 없으면 null을 return한다는 의미
-//
-////        System.out.println("person : " + person);
-//        log.info("person : {}", person);
-//
-//        return person;
-//    }
+    @Transactional
+    public List<Person> getBirthdayPerson(){
+        int month = LocalDate.now().getMonthValue();
+        int day = LocalDate.now().getDayOfMonth();
+        List<Integer> days = Arrays.asList(day, day + 1);
+        return personRepository.findByBirthday(month, days);
+    }
 }

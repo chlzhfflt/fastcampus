@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping(value = "/api/person")
 @RestController
 @Slf4j
@@ -27,34 +29,26 @@ public class PersonController {
     @ResponseStatus(HttpStatus.CREATED) // 201코드 : 200과 동일하게 생성되었음을 알려주는 CREATED 코드
     public void postPerson(@RequestBody Person person){
         personService.put(person);
-
-        log.info("person -> {} ", personRepository.findAll());
     }
 
     @PutMapping("/{id}")
     public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto){ // Person을 수정하는 API
         personService.modify(id, personDto);
-
-        log.info("person -> {} ", personRepository.findAll());
     }
 
     @PatchMapping("/{id}") // 일부 리소스만 업데이트
     public void modifyPerson(@PathVariable Long id, String name){ // Person의 이름만 수정하는 API
         personService.modify(id, name);
-
-        log.info("person -> {} ", personRepository.findAll());
     }
 
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable Long id){
         personService.delete(id);
-
-        log.info("person -> {} ", personRepository.findAll());
     }
 
-//    @GetMapping("/birthday-friends")
-//    public Person getBirthdayPerson(){
-//        personService.getBirthdayPerson()
-//    }
+@GetMapping("/birthday-friends")
+public List<Person> getBirthdayPerson(){
+    return personService.getBirthdayPerson();
+}
 
 }
